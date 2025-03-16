@@ -1,97 +1,124 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# UserList App
 
-# Getting Started
+A React Native application for managing and displaying users with role-based filtering and search functionality.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+![App Screenshot](./screenshots/app_screenshot.png)
 
-## Step 1: Start Metro
+## Features
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- **User Management**: View and filter users with different roles (Admin, Manager)
+- **Role-Based Filtering**: Toggle between different user types using a sleek UI
+- **Search Functionality**: Search users by name with real-time filtering
+- **Responsive UI**: Clean, modern interface using React Native components
+- **GraphQL Integration**: Connects to AWS AppSync for data management
+- **Pull-to-Refresh**: Easy data refreshing with pull-down gesture
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## Implementation Details
 
-```sh
-# Using npm
-npm start
+This app demonstrates several advanced React Native and modern JavaScript concepts:
 
-# OR using Yarn
-yarn start
+- **TypeScript**: Enhanced type safety throughout the application
+- **GraphQL with Apollo Client**: Efficient data fetching with Apollo client
+- **Enum Usage**: Implemented role types with TypeScript enums for better type safety
+- **FlatList with Header Components**: Optimized list rendering with header components
+- **Component Composition**: Clean architecture with reusable components
+- **CSS-in-JS**: Styling with StyleSheet for maintainable UI code
+
+### AWS AppSync Integration
+
+The app uses AWS AppSync as its GraphQL backend:
+
+- GraphQL queries for fetching users filtered by role
+- API Key authentication with AWS AppSync
+- Proper error handling and loading states
+
+## Project Structure
+
+```
+src/
+├── Constants/
+│   ├── colors.ts       # Color definitions
+│   ├── enums.ts        # TypeScript enums including UserRole
+│   └── strings.ts      # String constants
+├── graphql/
+│   ├── aws-exports.js  # AWS AppSync configuration
+│   ├── client.ts       # Apollo Client setup
+│   ├── queries.ts      # GraphQL queries
+│   └── schema.gql      # GraphQL schema
+├── route/
+│   └── index.tsx       # Navigation setup
+└── screens/
+    └── Users/
+        ├── index.tsx         # Main Users screen
+        ├── UserList.tsx      # User list component
+        └── UserTypes.tsx     # Role selection component
 ```
 
-## Step 2: Build and run your app
+## Technical Improvements
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+The app includes several technical improvements:
 
-### Android
+1. **Type Safety with Enums**: Replaced string constants with TypeScript enums for better type checking
+2. **Optimized List Rendering**: Moved UserTypes and search into FlatList header to avoid nested scrollable views
+3. **Enhanced Error Handling**: Improved error handling in GraphQL client
+4. **Pull-to-Refresh**: Added RefreshControl to improve user experience
+5. **AWS AppSync Integration**: Configured for both local development and production endpoints
 
-```sh
-# Using npm
-npm run android
+## Setup and Running
 
-# OR using Yarn
-yarn android
+### Prerequisites
+
+- Node.js and npm installed
+- React Native development environment setup
+- An AWS account with AppSync API configured (or use the local mock)
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+   ```
+   npm install
+   ```
+3. Update AWS AppSync configuration in `src/graphql/aws-exports.js` with your API details:
+   ```javascript
+   const awsExports = {
+     aws_appsync_graphqlEndpoint: 'YOUR_API_ENDPOINT',
+     aws_appsync_region: 'YOUR_REGION',
+     aws_appsync_authenticationType: 'API_KEY',
+     aws_appsync_apiKey: 'YOUR_API_KEY',
+   };
+   ```
+
+### Running the App
+
+For iOS:
+
 ```
-
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+For Android:
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+```
+npm run android
+```
 
-## Step 3: Modify your app
+## Testing
 
-Now that you have successfully run the app, let's make changes!
+Run tests with:
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+```
+npm test
+```
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+The app includes unit tests for components and screens using Jest and React Testing Library.
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+## Future Enhancements
 
-## Congratulations! :tada:
+Potential improvements for future versions:
 
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- User creation and editing functionality
+- Pagination for large user lists
+- Offline support with local caching
+- Dark mode support
+- Additional authentication methods

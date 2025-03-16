@@ -1,11 +1,14 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {StatusBar} from 'react-native';
+import {ApolloProvider, client} from './src/graphql/client';
+import AppNavigator from './src/route';
 
 const App = () => {
   return (
-    <View>
-      <Text>App</Text>
-    </View>
+    <ApolloProvider client={client}>
+      <StatusBar barStyle="dark-content" />
+      <AppNavigator />
+    </ApolloProvider>
   );
 };
 
