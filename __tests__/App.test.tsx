@@ -3,11 +3,27 @@
  */
 
 import React from 'react';
-import ReactTestRenderer from 'react-test-renderer';
+import {render} from '@testing-library/react-native';
 import App from '../App';
 
-test('renders correctly', async () => {
-  await ReactTestRenderer.act(() => {
-    ReactTestRenderer.create(<App />);
-  });
+// Mock the navigation components
+jest.mock('@react-navigation/native', () => ({
+  NavigationContainer: ({children}: {children: React.ReactNode}) => (
+    <>{children}</>
+  ),
+}));
+
+jest.mock('@react-navigation/bottom-tabs', () => ({
+  createBottomTabNavigator: () => ({
+    Navigator: ({children}: {children: React.ReactNode}) => <>{children}</>,
+    Screen: () => null,
+  }),
+}));
+
+jest.mock('../src/route', () => {
+  return () => <div>Mocked Navigation</div>;
+});
+
+test('renders without crashing', () => {
+  render(<App />);
 });

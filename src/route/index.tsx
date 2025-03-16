@@ -1,14 +1,13 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import TabNavigator from './TabNavigation';
 
-const MainNavigator = () => {
+const AppNavigator = () => {
   return (
-    <View>
-      <Text>MainNavigator</Text>
-    </View>
+    <NavigationContainer>
+      <TabNavigator />
+    </NavigationContainer>
   );
 };
 
-export default MainNavigator;
-
-const styles = StyleSheet.create({});
+export default AppNavigator;

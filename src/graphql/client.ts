@@ -4,9 +4,15 @@ import {
   HttpLink,
   ApolloProvider,
 } from '@apollo/client';
+import awsExports from './aws-exports';
 
 const client = new ApolloClient({
-  link: new HttpLink({uri: 'http://localhost:9002/'}), // Replace with your API
+  link: new HttpLink({
+    uri: awsExports.aws_appsync_graphqlEndpoint,
+    headers: {
+      'x-api-key': awsExports.aws_appsync_apiKey,
+    },
+  }),
   cache: new InMemoryCache(),
 });
 
