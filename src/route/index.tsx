@@ -1,14 +1,14 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-const App = () => {
+const MainNavigator = () => {
   return (
     <View>
-      <Text>App</Text>
+      <Text>MainNavigator</Text>
     </View>
   );
 };
 
-export default App;
+export default MainNavigator;
 
 const styles = StyleSheet.create({});
